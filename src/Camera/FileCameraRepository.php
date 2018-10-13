@@ -15,7 +15,7 @@ final class FileCameraRepository implements CameraRepository
 
     private $cameraData = [];
 
-    public function __construct($pathToFile)
+    public function __construct(string $pathToFile)
     {
         if (!file_exists($pathToFile)) {
             throw new \Exception('CSV file could not be found.');
@@ -43,7 +43,7 @@ final class FileCameraRepository implements CameraRepository
         fclose($fileHandle);
     }
 
-    private function parseCameraDataFromCsv($csvData)
+    private function parseCameraDataFromCsv(array $csvData): void
     {
         // The first column should contain a three-digit camera number
         if (!preg_match('/\d{3}/', $csvData[0], $numberMatch)) {
@@ -81,10 +81,6 @@ final class FileCameraRepository implements CameraRepository
         );
     }
 
-    /**
-     * @param string $name
-     * @return array
-     */
     public function findAllByName(string $name): array
     {
         // Case-insensitive name search

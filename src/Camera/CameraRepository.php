@@ -13,9 +13,5 @@ interface CameraRepository
      */
     public function getByNumber(int $number): Camera;
 
-    /**
-     * @param string $name
-     * @return array
-     */
     public function findAllByName(string $name): array;
 }

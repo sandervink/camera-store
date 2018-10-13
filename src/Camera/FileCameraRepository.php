@@ -15,6 +15,10 @@ final class FileCameraRepository implements CameraRepository
 
     private $cameraData = [];
 
+    /**
+     * @param string $pathToFile
+     * @throws \Exception
+     */
     public function __construct(string $pathToFile)
     {
         if (!file_exists($pathToFile)) {

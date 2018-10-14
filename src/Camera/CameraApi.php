@@ -13,6 +13,11 @@ final class CameraApi
         $this->repository = $repository;
     }
 
+    public function getAll(): array
+    {
+        return $this->repository->getAll();
+    }
+
     /**
      * @param int $number
      * @return Camera

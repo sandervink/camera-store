@@ -6,6 +6,8 @@ namespace CameraStore\Camera;
 
 interface CameraRepository
 {
+    public function getAll(): array;
+
     /**
      * @param int $number
      * @return Camera

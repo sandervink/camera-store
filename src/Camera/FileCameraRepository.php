@@ -64,6 +64,22 @@ final class FileCameraRepository implements CameraRepository
         ];
     }
 
+    public function getAll(): array
+    {
+        $allCameras = [];
+
+        foreach ($this->cameraData as $cameraData) {
+            $allCameras[] = new Camera(
+                $cameraData[self::KEY_NUMBER],
+                $cameraData[self::KEY_NAME],
+                $cameraData[self::KEY_LATITUDE],
+                $cameraData[self::KEY_LONGITUDE]
+            );
+        }
+
+        return $allCameras;
+    }
+
     /**
      * @param int $number
      * @return Camera

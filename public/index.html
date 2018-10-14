@@ -104,7 +104,36 @@
         }
     </style>
     <script type="text/javascript" src="./js/CameraTable.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBrZ4yiuOqjorumys_d4BlPpT7lPaftF0Q"></script>
     <script>
+      function createAndPopulateGoogleMapsMap(cameraData) {
+        const utrecht = { lat: 52.092876, lng: 5.104480 };
+
+        const map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 10,
+          center: utrecht,
+        });
+
+        // Keep track of all markers
+        const bounds = new google.maps.LatLngBounds();
+
+        cameraData.cameras.forEach(camera => {
+          // Add a marker for each camera
+          const marker = new google.maps.Marker({
+            position: { lat: camera.latitude, lng: camera.longitude },
+            map: map,
+            title: camera.name,
+          });
+
+          const location = new google.maps.LatLng(marker.position.lat(), marker.position.lng());
+          bounds.extend(location);
+        });
+
+        // Set best available zoom level (and center the map) based on marker positions
+        map.fitBounds(bounds);
+        map.panToBounds(bounds);
+      }
+
       window.onload = () => {
         if (document.getElementById('cameraTableContainer') !== null) {
           // Fetch the cameras from the API.
@@ -120,6 +149,7 @@
 
               const cameraTable = new CameraTable('column3', 'column5', 'column15', 'columnOther');
               cameraTable.populateCameraTable(cameraData);
+              createAndPopulateGoogleMapsMap(cameraData);
             })
           ;
         }

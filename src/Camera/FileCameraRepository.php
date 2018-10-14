@@ -59,8 +59,8 @@ final class FileCameraRepository implements CameraRepository
         $this->cameraData[$cameraNumber] = [
             self::KEY_NUMBER => $cameraNumber,
             self::KEY_NAME => $csvData[0],
-            self::KEY_LATITUDE => $csvData[1],
-            self::KEY_LONGITUDE => $csvData[2],
+            self::KEY_LATITUDE => (float)$csvData[1],
+            self::KEY_LONGITUDE => (float)$csvData[2],
         ];
     }
 

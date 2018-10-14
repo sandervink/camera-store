@@ -11,7 +11,7 @@ final class Camera
     private $latitude;
     private $longitude;
 
-    public function __construct(int $number, string $name, string $latitude, string $longitude)
+    public function __construct(int $number, string $name, float $latitude, float $longitude)
     {
         $this->number = $number;
         $this->name = $name;
@@ -29,12 +29,12 @@ final class Camera
         return $this->name;
     }
 
-    public function getLatitude(): string
+    public function getLatitude(): float
     {
         return $this->latitude;
     }
 
-    public function getLongitude(): string
+    public function getLongitude(): float
     {
         return $this->longitude;
     }

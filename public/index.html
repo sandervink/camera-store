@@ -103,7 +103,28 @@
             width: 100%;
         }
     </style>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="./js/CameraTable.js"></script>
+    <script>
+      window.onload = () => {
+        if (document.getElementById('cameraTableContainer') !== null) {
+          // Fetch the cameras from the API.
+          // For now a failure is silently dropped.
+          fetch('/api/cameras/')
+            .then(response => {
+              return response.json();
+            })
+            .then(cameraData => {
+              if (typeof cameraData.cameras !== 'object') {
+                return;
+              }
+
+              const cameraTable = new CameraTable('column3', 'column5', 'column15', 'columnOther');
+              cameraTable.populateCameraTable(cameraData);
+            })
+          ;
+        }
+      };
+    </script>
 </head>
 
 <body>
